@@ -2,8 +2,8 @@
     "project_name": "Your Project Name",
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "project_short_description": "Simple hello function running on Google Cloud App Engine.",
-    "aws_accesskey": "y",
-    "aws_secret+key": "y",
-    "aws_region": "y",
-    "project_env": "y"
+    "access_key": "Enter Your Access Key",
+    "secret_key": "Enter Your Secret Key",
+    "aws_region": "Enter AWS Region",
+    "project_env": "Enter Environment"
 }
