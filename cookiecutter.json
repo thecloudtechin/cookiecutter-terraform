@@ -1,10 +1,9 @@
 {
-    "project_name": "Hello Function",
+    "project_name": "Your Project Name",
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "project_short_description": "Simple hello function running on Google Cloud App Engine.",
-    "use_pytest": "y",
-    "use_pylint": "y",
-    "use_git": "y",
-    "use_github_actions": "y",
-    "use_monitoring": ["datadog", "operation", "none"]
+    "aws_accesskey": "y",
+    "aws_secret+key": "y",
+    "aws_region": "y",
+    "project_env": "y"
 }
