@@ -13,40 +13,41 @@ def remove(filepath):
     elif os.path.isdir(filepath):
         shutil.rmtree(filepath)
 
-def init_git():
+def init_terraform():
     """
-    Initialises git on the new project folder
+    Initialises terraform on the new project folder
     """
-    GIT_COMMANDS = [
-        ["git", "init"],
-        ["git", "add", "."],
-        ["git", "commit", "-a", "-m", ":cookie: Initial Commit :rocket:"],
-        ["git", "branch", "-m", "master", "main"]
+    TERRAFORM_COMMANDS = [
+        ["terraform", "init"],
+        ["terraform", "validate"],
+        ["terraform", "plan"],
+#        ["terraform", "plan", "-a", "-m", ":cookie: Initial Commit :rocket:"],
+#        ["git", "branch", "-m", "master", "main"]
     ]
 
-    for command in GIT_COMMANDS:
-        git = Popen(command, cwd=PROJECT_DIRECTORY)
-        git.wait()
+    for command in TERRAFORM_COMMANDS:
+        terraform = Popen(command, cwd=PROJECT_DIRECTORY)
+        terraform.wait()
 
-
+#####################
 
 # Remove unused files
-create_pytest = '{{cookiecutter.use_pytest}}' == 'y'
-create_pylint = '{{cookiecutter.use_pylint}}' == 'y'
-create_github_actions = '{{cookiecutter.use_github_actions}}' == 'y'
+# create_pytest = '{{cookiecutter.use_pytest}}' == 'y'
+# create_pylint = '{{cookiecutter.use_pylint}}' == 'y'
+# create_github_actions = '{{cookiecutter.use_github_actions}}' == 'y'
 
-if not create_pytest:
-    remove('{{cookiecutter.project_slug}}/test_main.py')
+# if not create_pytest:
+#     remove('{{cookiecutter.project_slug}}/test_main.py')
 
-if not create_pylint:
-    remove('{{cookiecutter.project_slug}}/.pylintrc')
+# if not create_pylint:
+#     remove('{{cookiecutter.project_slug}}/.pylintrc')
 
-if not create_github_actions:
-    remove('.github')
+# if not create_github_actions:
+#     remove('.github')
 
-# Initialize Git (should be run after all file have been modified or deleted)
-if '{{ cookiecutter.use_git }}'.lower() == 'y':
-    init_git()
-else:
-    remove(".gitignore")
-    remove('.github')
+# # Initialize Git (should be run after all file have been modified or deleted)
+# if '{{ cookiecutter.use_git }}'.lower() == 'y':
+#     init_git()
+# else:
+#     remove(".gitignore")
+#     remove('.github')
