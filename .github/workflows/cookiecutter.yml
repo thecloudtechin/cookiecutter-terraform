@@ -1,63 +1,63 @@
-name: Generate and Configure Terraform Project
+# name: Generate and Configure Terraform Project
 
-on:
-  workflow_dispatch:
-    inputs:
-      region:
-        description: 'AWS Region'
-        required: true
-        default: 'us-east-1'
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       region:
+#         description: 'AWS Region'
+#         required: true
+#         default: 'us-east-1'
 
-      project_name:
-        description: 'Terraform Project Name'
-        required: true
-        default: 'my-terraform-project'
+#       project_name:
+#         description: 'Terraform Project Name'
+#         required: true
+#         default: 'my-terraform-project'
 
-jobs:
-  generate_project:
-    runs-on: ubuntu-latest
+# jobs:
+#   generate_project:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
+#       - name: Set up Python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: 3.8
 
-      - name: Install Cookiecutter
-        run: |
-          python -m pip install --upgrade pip
-          pip install cookiecutter
+#       - name: Install Cookiecutter
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install cookiecutter
 
-      - name: Set Terraform Variables as Environment Variables
-        run: |
-          echo "REGION=${{ github.event.inputs.region }}" >> $GITHUB_ENV
-          echo "PROJECT_NAME=${{ github.event.inputs.project_name }}" >> $GITHUB_ENV
+#       - name: Set Terraform Variables as Environment Variables
+#         run: |
+#           echo "REGION=${{ github.event.inputs.region }}" >> $GITHUB_ENV
+#           echo "PROJECT_NAME=${{ github.event.inputs.project_name }}" >> $GITHUB_ENV
 
-      - name: Run Cookiecutter with Variables
-        run: |
-          cookiecutter gh:your-username/your-cookiecutter-repo \
-            --no-input \
-            -o generated-terraform-project \
-            region=${{ env.REGION }} \
-            project_name=${{ env.PROJECT_NAME }}
+#       - name: Run Cookiecutter with Variables
+#         run: |
+#           cookiecutter gh:your-username/your-cookiecutter-repo \
+#             --no-input \
+#             -o generated-terraform-project \
+#             region=${{ env.REGION }} \
+#             project_name=${{ env.PROJECT_NAME }}
 
-      - name: Change to Terraform Directory
-        run: |
-          cd generated-terraform-project
+#       - name: Change to Terraform Directory
+#         run: |
+#           cd generated-terraform-project
 
-      - name: Initialize Terraform
-        run: |
-          terraform init
+#       - name: Initialize Terraform
+#         run: |
+#           terraform init
 
-      - name: Apply Terraform
-        run: |
-          terraform apply -auto-approve
+#       - name: Apply Terraform
+#         run: |
+#           terraform apply -auto-approve
 
-      - name: Commit and Push Changes
-        run: |
-          git add .
-          git commit -m "Generate and configure Terraform project with Cookiecutter"
-          git push
+#       - name: Commit and Push Changes
+#         run: |
+#           git add .
+#           git commit -m "Generate and configure Terraform project with Cookiecutter"
+#           git push
